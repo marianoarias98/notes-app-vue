@@ -84,25 +84,45 @@ const useAuth = defineStore('auth', {
       const response = await rawresponse.json()
       return response.message
     },
-    async deleteNote(id){
+    async deleteNote(id) {
       const url = `${this.urlServe}/delete`
-        const rawresponse = await fetch(url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'Application/json',
-            'Accept': 'Application/json',
-            'Authorization': `Bearer ${this.token}`
-          },
-          body: JSON.stringify({
-            'id': id
-          })
+      const rawresponse = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/json',
+          'Accept': 'Application/json',
+          'Authorization': `Bearer ${this.token}`
+        },
+        body: JSON.stringify({
+          'id': id
         })
-  
-        const response = await rawresponse.json()
-        return response.message
-    }
-  },
+      })
 
+      const response = await rawresponse.json()
+      return response.message
+    },
+    async show(id) {
+      const url = `${this.urlServe}/show`
+      const rawresponse = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/json',
+          'Accept': 'Application/json',
+          'Authorization': `Bearer ${this.token}`
+        },
+        body: JSON.stringify({
+          'id': id
+        })
+      })
+
+      const response = await rawresponse.json()
+      return response
+    },
+  },
+  persist: {
+    storage: sessionStorage,
+    path: ['token']
+  }
 
 })
 

@@ -3,7 +3,7 @@
   <div class="form-group mb-2">
     <h3 class="mb-4">Create Note</h3>
     <div class="form-group mb-2">
-      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Title" v-model="title" maxlength="10" required>
+      <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Title" v-model="title" maxlength="20" required>
     </div>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" v-model="content" placeholder="Content" maxlength="100" required></textarea>
   </div>
