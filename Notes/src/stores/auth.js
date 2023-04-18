@@ -118,6 +118,26 @@ const useAuth = defineStore('auth', {
       const response = await rawresponse.json()
       return response
     },
+
+    async update(id, title, content){
+      const url = `${this.urlServe}/update`
+      const rawresponse = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'Application/json',
+          'Accept': 'Application/json',
+          'Authorization': `Bearer ${this.token}`
+        },
+        body: JSON.stringify({
+          'id': id,
+          'title': title,
+          'content': content
+        })
+      })
+
+      const response = await rawresponse.json()
+      return response
+    }
   },
   persist: {
     storage: sessionStorage,

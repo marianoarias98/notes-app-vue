@@ -41,8 +41,9 @@ const DeleteNote = async (id, index) => {
   notes.value.splice(index, 1)
 }
 
-const handleModal = () => {
+const handleModal = async() => {
   showModal.value = !showModal.value
+  // (showModal.value) ? notes.value = await store.getNotes() : ''
 }
 
 const handleID = (note_id) =>{
@@ -63,7 +64,7 @@ const handleID = (note_id) =>{
 
 .notes {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   margin-top: 20px;
 }

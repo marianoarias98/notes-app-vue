@@ -12,7 +12,10 @@
         <textarea class="form-control" rows="3" v-model="note.content" placeholder="Content" maxlength="100"
           required></textarea>
       </div>
-        <button class="btn btn-primary mt-4 mb-4">Edit</button>
+      <div v-if="loading" class="spinner-border mt-4" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <button v-else class="btn btn-primary mt-4" @click.prevent="update()">Update</button>
     </form>
   </div>
 </template>
@@ -26,16 +29,23 @@ const store = useAuth()
 const router = useRouter()
 const note = ref('')
 const emit = defineEmits()
+const loading = ref(true)
 
 const props = defineProps({
   note_id: Number
 })
 onMounted(async () => {
   note.value = await store.show(props.note_id)
+  loading.value = false
 })
 
-const hideModal = () =>{
+const hideModal = () => {
   emit('handleModal')
+}
+
+const update = async () => {
+  const response = await store.update(note.value.id, note.value.title, note.value.content)
+  hideModal()
 }
 </script>
 
@@ -62,7 +72,7 @@ const hideModal = () =>{
   width: 600px;
 }
 
-.card-upper{
+.card-upper {
   display: flex;
   justify-content: space-between;
   align-items: center;
